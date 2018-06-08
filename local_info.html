@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>音视频一线通终端管理设置</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10,chrome=1">
+        <link rel="stylesheet" href="./css/main.css">
+        <style type="text/css">
+            .layui-form-label {
+                min-width: 140px !important;
+                background-color: #44993D !important;
+                color: #FFFFFF;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+                <a>
+                    <cite>关于本机</cite>
+                </a>
+            </span>
+            <a class="layui-btn layui-btn-sm" style="float: right;" href="javascript:location.replace(location.href);" title="刷新">
+                <i class="layui-icon layui-icon-refresh"></i>
+            </a>
+        </div>
+        <div class="layui-form layui-form-pane">
+            <div class="layui-form-item" style="margin-top: 20px;">
+            	<div class="layui-inline">
+                	<label class="layui-form-label">当前系统版本号</label>
+                	<div class="layui-input-inline">
+                		<input type="text" name="systemverion" id="mach1" placeholder="当前系统版本号" class="layui-input" disabled=""> 
+                	</div>
+                </div>
+                <div class="layui-inline">
+                	<div class="layui-input-block">
+                    	<button class="layui-btn layui-btn-primary" style="color:#000;" id="reset">重启系统</button>
+            			<button class="layui-btn layui-btn-primary" style="color:#000;" id="factory_reset">恢复出厂设置</button>
+                	</div>
+            	</div>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/local_info.js"></script>
+        <script type="text/javascript" src="./js/security.js"></script>
+        <script type="text/javascript" src="./js/forbid_backspace.js"></script>
+        <script type="text/javascript" src="./js/protocal.js"></script>
+        <script type="text/javascript" src="./layui/layui.js"></script>
+        <script type="text/javascript">
+            layui.use(['element', 'layer'], function () {
+                var layer = layui.layer,
+                    $ = layui.jquery;
+                try {
+                    var result = protocal_get_resystem("version", null);
+                    if(result.length < 1) {} else {
+                    	$('#mach1').val(result[0]);
+                    }
+                } catch(err) {}    
+                $("button").off("mousedown").on("mousedown", function () {
+                    $(this).css({
+                        "background-color": "#44993D",
+                        "color": "white"
+                    });
+                })
+                $("button").off("mouseup").on("mouseup", function () {
+                    $(this).css({
+                        "background-color": "#fff",
+                        "color": "#555"
+                    });
+                })
+                /*重启系统*/
+                $('#reset').on('click', function () {
+                    var result = protocal_set("reset", 'system');
+                    if(result[0] == 'ok') {
+                        top.layer.open({
+                            title: false,
+                            icon: 6,
+                            time: 250000,
+                            content: '正在重启系统...',
+                            btn: false,
+                            skin: "layui-layer-molv",
+                            closeBtn: 0,
+                        })
+                        setCookie("username", "", "pass", "", "usernameone", "", "passone", "");
+                        setTimeout(function () {
+                            window.parent.location.reload();
+                        }, 25000);
+                    } else {
+                        layer.msg('重启失败！', {
+                            time: 3000,
+                            icon: 2,
+                            anim: 0,
+                            skin: 'message'
+                        });
+                    }
+                })
+                /*恢复出厂值*/
+                $('#factory_reset').on('click', function () {
+                    var result = protocal_set_resystem("restore_set", 'restore');
+                    if(result[0] == 'ok') {
+                        top.layer.open({
+                            title: false,
+                            icon: 6,
+                            time: 250000,
+                            content: '正在恢复出厂值...',
+                            btn: false,
+                            skin: "layui-layer-molv",
+                            closeBtn: 0,
+                        })
+                        setCookie("username", "", "pass", "", "usernameone", "", "passone", "");
+                        setTimeout(function () {
+                            window.parent.location.reload();
+                        }, 25000);
+                    } else {
+                        layer.msg('恢复出厂值失败！', {
+                            time: 3000,
+                            icon: 2,
+                            anim: 0,
+                            skin: 'message'
+                        });
+                    }
+                })
+                /*恢复出厂值结束*/
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html >
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>音视频一线通终端管理设置</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10,chrome=1">
+        <link rel="stylesheet" type="text/css" href="./layui/css/layui.css">
+        <link rel="stylesheet" type="text/css" href="./css/login.css" />
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css"> </head>
+    <body onkeydown="keyLogin()">
+        <div class="top">
+            <img src="images/login_logo.png" /> </div>
+        <div style="width: 20%; margin:0px auto;text-align: center;font-size: 2em;font-weight:bold;" id="className"> </div>
+        <form class="layui-form uspw">
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <i class="fa fa-user fa-lg" aria-hidden="true" style="font-size: 30px;"></i>
+                </label>
+                <div class="layui-input-block">
+                    <input class="layui-input" id="username" type="text" placeholder='Username' autocomplete="off" name="user" /> </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <i class="fa fa-key fa-fw" aria-hidden="true" style="font-size: 16px;"></i>
+                </label>
+                <div class="layui-input-block">
+                    <input class="layui-input" id="pass" type="password" placeholder='Password' autocomplete="off" name="pwd" /> </div>
+            </div>
+            <div class="layui-form-item login">
+                <button class="layui-btn layui-btn-primary layui-btn-radius" id='demo1' lay-submit="" lay-filter='demo1'> 登录 </button>
+            </div>
+            <div style="text-align:center; color:white;font-size: 15px;margin-top: 10%;">
+                <div>©&nbsp;&nbsp;2017&nbsp;广州市迪士普智慧科技有限公司&nbsp;&nbsp;IDMS9902_V00.08</div>
+            </div>
+        </form>
+        <script type="text/javascript" src="./js/login_protocal.js"></script>
+        <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="./layui/layui.js"></script>
+        <script type="text/javascript" src="./js/base64.js"></script>
+        <script type="text/javascript">
+            layui.use(['element', 'layer', 'form'], function () {
+                var layer = layui.layer,
+                    form = layui.form,
+                    $ = layui.jquery;
+                try {
+                    var base = new Base64();
+                    var loginName = protocal_get("login_name", null);
+                    $('#className').html(base.decode(loginName[0]));
+                } catch(err) {}
+                $('#username').focus();
+                //监听提交
+                form.on('submit(demo1)', function (data) {
+                	if(data.field.user == '') {
+                        layer.msg('用户名为空！', {
+                            time: 2000,
+                            icon: 5,
+                            anim: 6,
+                            skin: 'message'
+                        });
+                        return false;
+                    }
+                	if(data.field.pwd == '') {
+                        layer.msg('密码为空！', {
+                            time: 2000,
+                            icon: 5,
+                            anim: 6,
+                            skin: 'message'
+                        });
+                        return false;
+                    }
+                	setCookie("usernameone", data.field.user, "passone", data.field.pwd);
+                	if(data.field.user == "dsppa" && data.field.pwd == "dsppa") {
+                        location.href = './main.html';
+                    } else {
+                    	layer.msg('用户名或密码输入信息有错误！', {
+                            time: 2000,
+                            icon: 2,
+                            anim: 6,
+                            skin: 'message'
+                        });
+                        
+                    }
+                    return false;
+                });
+            });
+
+            function keyLogin() {
+                if(event.keyCode == 13) //回车键的键值为13
+                    document.getElementById("demo1").click(); //调用登录按钮的登录事件
+            }
+
+            function setCookie(cnameone, cvaluenameone, cpassone, cvaluepassone) {
+                document.cookie = cnameone + "=" + cvaluenameone;
+                document.cookie = cpassone + "=" + cvaluepassone;
+            }
+        </script>
+    </body>
+</html>

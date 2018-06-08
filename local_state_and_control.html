@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10,chrome=1">
+        <link rel="stylesheet" type="text/css" href="./css/main.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+        <style type="text/css">
+            input[type='text'] {
+                text-align: center;
+            }
+            .buttposi {
+                text-align: center;
+            }
+            .lable-auto {
+                background-color: #44993D !important;
+                color: white;
+            }
+            .label-one {
+                min-width: 230px;
+            }
+            .layui-input-block-first {
+                margin-left: 230px!important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+                <a>
+                    <cite>本机状态与控制</cite>
+                </a>
+            </span>
+            <a class="layui-btn layui-btn-sm" style="float: right;" href="javascript:location.replace(location.href);" title="刷新">
+                <i class="layui-icon layui-icon-refresh"></i>
+            </a>
+        </div>
+        <fieldset class="layui-elem-field layui-field-box" style="margin-top: 20px;">
+            <!--<legend>视频编码通道</legend>-->
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>视频编码通道1（HDMI1）</td>
+                        <td class="buttposi">
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewone')" onclick="setorder('HDMI1',0)" id="encodeone">是否编码</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodeone')" onclick="setorder('HDMI1',1)" id="previewone">预览</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频编码通道2（HDMI2）</td>
+                        <td class="buttposi">
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewtwo')" onclick="setorder('HDMI2',0)" id="encodetwo">是否编码</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodetwo')" onclick="setorder('HDMI2',1)" id="previewtwo">预览</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频编码通道3（SDI1）</td>
+                        <td class="buttposi">
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewthree')" onclick="setorder('SDI1',0)" id="encodethree">是否编码</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodethree')" onclick="setorder('SDI1',1)" id="previewthree">预览</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频编码通道4（SDI2）</td>
+                        <td class="buttposi">
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewfour')" onclick="setorder('SDI2',0)" id="encodefour">是否编码</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodefour')" onclick="setorder('SDI2',1)" id="previewfour">预览</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <fieldset class="layui-elem-field layui-field-box" style="margin-top: 20px;">
+            <!--<legend>1</legend>-->
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-item" pane="">
+                    <label class="layui-form-label label-one lable-auto">音频编码通道是否绑定编码通道</label>
+                    <div class="layui-input-block layui-input-block-first">
+                        <input name="selection" value="是" id="yes" title="是" checked="" type="radio" lay-filter='radio1'>
+                        <input name="selection" value="否" id="no" title="否" type="radio" lay-filter='radio1'> </div>
+                </div>
+                <div class="layui-form-item" pane="">
+                    <label class="layui-form-label label-one lable-auto">绑定编码通道</label>
+                    <div class="layui-input-block layui-input-block-first">
+                        <input name="access" value="3" id="three" title="3" checked="" type="radio" lay-filter='radio2'>
+                        <input name="access" value="4" id='four' title="4" type="radio" lay-filter='radio2'> </div>
+                </div>
+            </form>
+        </fieldset>
+        <script type="text/javascript" src="./layui/layui.js"></script>
+        <script type="text/javascript" src="./js/protocal.js"></script>
+        <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="./js/security.js"></script>
+        <script type="text/javascript" src="./js/forbid_backspace.js"></script>
+        <script type="text/javascript">
+            //初始值的获取
+            layui.use(['element', 'layer', 'form'], function () {
+                var layer = layui.layer,
+                    form = layui.form,
+                    $ = layui.jquery;
+                try {
+                    var result = protocal_get('state_control', null);
+                    /*var result = ['1','0','1','0','0','1'];*/
+                    if(result.length < 6) {
+                        layer.msg('获取返回值数量有误！', { icon: 2 });
+                        return false;
+                    }
+                    if(result[0] == '0') {
+                        $('#encodeone').attr('class', 'layui-btn layui-btn-radius');
+                    } else {
+                        $('#previewone').attr('class', 'layui-btn layui-btn-radius');
+                    }
+                    if(result[1] == '0') {
+                        $('#encodetwo').attr('class', 'layui-btn layui-btn-radius');
+                    } else {
+                        $('#previewtwo').attr('class', 'layui-btn layui-btn-radius');
+                    }
+                    if(result[2] == '0') {
+                        $('#encodethree').attr('class', 'layui-btn layui-btn-radius');
+                    } else {
+                        $('#previewthree').attr('class', 'layui-btn layui-btn-radius');
+                    }
+                    if(result[3] == '0') {
+                        $('#encodefour').attr('class', 'layui-btn layui-btn-radius');
+                    } else {
+                        $('#previewfour').attr('class', 'layui-btn layui-btn-radius');
+                    }
+                    if(result[4] == '0') {
+                        $('#yes').attr('checked', ' ')
+                    } else {
+                        $('#no').attr('checked', ' ')
+                    }
+                    if(result[5] == '0') {
+                        $('#three').attr('checked', ' ')
+                    } else {
+                        $('#four').attr('checked', ' ')
+                    }
+                    form.render();
+                } catch(err) {}
+                form.on('radio(radio1)', function (data) {
+                    if(data.value == '否') {
+                        $('#three').attr('disabled', true)
+                        $('#four').attr('disabled', true);
+                        setorder('control_work', 1)
+                    } else {
+                        $('#three').removeAttr('disabled')
+                        $('#four').removeAttr('disabled');
+                        setorder('control_work', 0);
+                    }
+                    form.render();
+                })
+                form.on('radio(radio2)', function (data) {
+                    if(data.value == 3) {
+                        setorder('control_bind', 0);
+                    } else {
+                        setorder('control_bind', 1);
+                    }
+                    form.render();
+                })
+            });
+
+            function setorder(name, value) {
+                var result = protocal_set(name, value);
+                if(result[0] == 'ok') {} else {
+                    layer.msg('未成功!', { icon: 5 })
+                }
+            }
+
+            function colorswith(parse1, parse2) {
+                $(parse1).attr('class', 'layui-btn layui-btn-radius');
+                $(parse2).attr('class', 'layui-btn layui-btn-primary layui-btn-radius');
+            }
+        </script>
+    </body>
+</html>
