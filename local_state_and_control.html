@@ -36,67 +36,57 @@
                 <i class="layui-icon layui-icon-refresh"></i>
             </a>
         </div>
-        <fieldset class="layui-elem-field layui-field-box" style="margin-top: 20px;">
-            <!--<legend>视频编码通道</legend>-->
+        <form class="layui-form" lay-filter="form">
             <table class="layui-table">
                 <thead>
                     <tr>
-                        <th>名称</th>
-                        <th>操作</th>
+                        <th style="width:26%">名称</th>
+                        <th style="width:28%">状态</th>
+                        <th style="width:46%">操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>视频编码通道1（HDMI1）</td>
+                        <td id="HDMI1"></td>
                         <td class="buttposi">
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewone')" onclick="setorder('HDMI1',0)" id="encodeone">是否编码</button>
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodeone')" onclick="setorder('HDMI1',1)" id="previewone">预览</button>
-                        </td>
+                            <input type="radio" id="HDMI11" title="1" value="1" name="HDMI1" lay-filter="HDMI1" />
+                            <input type="radio" id="HDMI12" title="2" value="2" name="HDMI1" lay-filter="HDMI1" />
+                            <input type="radio" id="HDMI13" title="3" value="3" name="HDMI1" lay-filter="HDMI1" />
+                            <input type="radio" id="HDMI14" title="无" value="无" name="HDMI1" lay-filter="HDMI1" /> </td>
                     </tr>
                     <tr>
                         <td>视频编码通道2（HDMI2）</td>
+                        <td id="HDMI2"></td>
                         <td class="buttposi">
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewtwo')" onclick="setorder('HDMI2',0)" id="encodetwo">是否编码</button>
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodetwo')" onclick="setorder('HDMI2',1)" id="previewtwo">预览</button>
-                        </td>
+                            <input type="radio" id="HDMI21" title="1" value="1" name="HDMI2" lay-filter="HDMI2" />
+                            <input type="radio" id="HDMI22" title="2" value="2" name="HDMI2" lay-filter="HDMI2" />
+                            <input type="radio" id="HDMI23" title="3" value="3" name="HDMI2" lay-filter="HDMI2" />
+                            <input type="radio" id="HDMI24" title="无" value="无" name="HDMI2" lay-filter="HDMI2" /> </td>
                     </tr>
                     <tr>
                         <td>视频编码通道3（SDI1）</td>
+                        <td id="SDI1"></td>
                         <td class="buttposi">
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewthree')" onclick="setorder('SDI1',0)" id="encodethree">是否编码</button>
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodethree')" onclick="setorder('SDI1',1)" id="previewthree">预览</button>
-                        </td>
+                            <input type="radio" id="SDI11" title="1" value="1" name="SDI1" lay-filter="SDI1" />
+                            <input type="radio" id="SDI12" title="2" value="2" name="SDI1" lay-filter="SDI1" />
+                            <input type="radio" id="SDI13" title="3" value="3" name="SDI1" lay-filter="SDI1" />
+                            <input type="radio" id="SDI14" title="无" value="无" name="SDI1" lay-filter="SDI1" /> </td>
                     </tr>
                     <tr>
                         <td>视频编码通道4（SDI2）</td>
+                        <td id="SDI2"></td>
                         <td class="buttposi">
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#previewfour')" onclick="setorder('SDI2',0)" id="encodefour">是否编码</button>
-                            <button class="layui-btn layui-btn-primary layui-btn-radius" onmousedown="colorswith(this,'#encodefour')" onclick="setorder('SDI2',1)" id="previewfour">预览</button>
-                        </td>
+                            <input type="radio" id="SDI21" title="1" value="1" name="SDI2" lay-filter="SDI2" />
+                            <input type="radio" id="SDI22" title="2" value="2" name="SDI2" lay-filter="SDI2" />
+                            <input type="radio" id="SDI23" title="3" value="3" name="SDI2" lay-filter="SDI2" />
+                            <input type="radio" id="SDI24" title="无" value="无" name="SDI2" lay-filter="SDI2" /> </td>
                     </tr>
                 </tbody>
             </table>
-        </fieldset>
-        <fieldset class="layui-elem-field layui-field-box" style="margin-top: 20px;">
-            <!--<legend>1</legend>-->
-            <form class="layui-form layui-form-pane" action="">
-                <div class="layui-form-item" pane="">
-                    <label class="layui-form-label label-one lable-auto">音频编码通道是否绑定编码通道</label>
-                    <div class="layui-input-block layui-input-block-first">
-                        <input name="selection" value="是" id="yes" title="是" checked="" type="radio" lay-filter='radio1'>
-                        <input name="selection" value="否" id="no" title="否" type="radio" lay-filter='radio1'> </div>
-                </div>
-                <div class="layui-form-item" pane="">
-                    <label class="layui-form-label label-one lable-auto">绑定编码通道</label>
-                    <div class="layui-input-block layui-input-block-first">
-                        <input name="access" value="3" id="three" title="3" checked="" type="radio" lay-filter='radio2'>
-                        <input name="access" value="4" id='four' title="4" type="radio" lay-filter='radio2'> </div>
-                </div>
-            </form>
-        </fieldset>
+        </form>
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript" src="./js/protocal.js"></script>
-        <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="./js/security.js"></script>
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
         <script type="text/javascript">
@@ -105,65 +95,131 @@
                 var layer = layui.layer,
                     form = layui.form,
                     $ = layui.jquery;
+                    
+                form.on('radio(HDMI1)', function (data) {
+                    if(data.value == 1) {
+                        setorder('HDMI1', 1);
+                    } else if(data.value == 2) {
+                        setorder('HDMI1', 2);
+                    } else if(data.value == 3) {
+                        setorder('HDMI1', 3);
+                    } else {
+                        setorder('HDMI1', 4);
+                    }
+                })
+                form.on('radio(HDMI2)', function (data) {
+                    if(data.value == 1) {
+                        setorder('HDMI2', 1);
+                    } else if(data.value == 2) {
+                        setorder('HDMI2', 2);
+                    } else if(data.value == 3) {
+                        setorder('HDMI2', 3);
+                    } else {
+                        setorder('HDMI2', 4);
+                    }
+                })
+                form.on('radio(SDI1)', function (data) {
+                    if(data.value == 1) {
+                        setorder('SDI1', 1);
+                    } else if(data.value == 2) {
+                        setorder('SDI1', 2);
+                    } else if(data.value == 3) {
+                        setorder('SDI1', 3);
+                    } else {
+                        setorder('SDI1', 4);
+                    }
+                })
+                form.on('radio(SDI2)', function (data) {
+                    if(data.value == 1) {
+                        setorder('SDI2', 1);
+                    } else if(data.value == 2) {
+                        setorder('SDI2', 2);
+                    } else if(data.value == 3) {
+                        setorder('SDI2', 3);
+                    } else {
+                        setorder('SDI2', 4);
+                    }
+                })
                 try {
-                    var result = protocal_get('state_control', null);
-                    /*var result = ['1','0','1','0','0','1'];*/
-                    if(result.length < 6) {
-                        layer.msg('获取返回值数量有误！', { icon: 2 });
+                	var result1,result2,result3,result4;
+                    result1 = protocal_get('state_control_1', null);
+                    result2 = protocal_get('state_control_2', null);
+                    result3 = protocal_get('state_control_3', null);
+                    result4 = protocal_get('state_control_4', null);
+                    if(result1.length < 2) {
+                        layer.msg('获取result1返回值数量有误！', { icon: 2 });
                         return false;
                     }
-                    if(result[0] == '0') {
-                        $('#encodeone').attr('class', 'layui-btn layui-btn-radius');
-                    } else {
-                        $('#previewone').attr('class', 'layui-btn layui-btn-radius');
+                    if(result2.length < 2) {
+                        layer.msg('获取result2返回值数量有误！', { icon: 2 });
+                        return false;
                     }
-                    if(result[1] == '0') {
-                        $('#encodetwo').attr('class', 'layui-btn layui-btn-radius');
-                    } else {
-                        $('#previewtwo').attr('class', 'layui-btn layui-btn-radius');
+                    if(result3.length < 2) {
+                        layer.msg('获取result3返回值数量有误！', { icon: 2 });
+                        return false;
                     }
-                    if(result[2] == '0') {
-                        $('#encodethree').attr('class', 'layui-btn layui-btn-radius');
-                    } else {
-                        $('#previewthree').attr('class', 'layui-btn layui-btn-radius');
+                    if(result4.length < 2) {
+                        layer.msg('获取result4返回值数量有误！', { icon: 2 });
+                        return false;
                     }
-                    if(result[3] == '0') {
-                        $('#encodefour').attr('class', 'layui-btn layui-btn-radius');
-                    } else {
-                        $('#previewfour').attr('class', 'layui-btn layui-btn-radius');
+                    if(result1[0] == 1) {
+                        $('#HDMI11').attr('checked', ' ')
+                    } else if(result1[0] == 2) {
+                        $('#HDMI12').attr('checked', ' ')
+                    } else if(result1[0] == 3) {
+                        $('#HDMI13').attr('checked', ' ')
+                    } else if(result1[0] == 4) {
+                        $('#HDMI14').attr('checked', ' ')
                     }
-                    if(result[4] == '0') {
-                        $('#yes').attr('checked', ' ')
+                    if(result1[1] == 0) {
+                        $('#HDMI1').text('空闲')
                     } else {
-                        $('#no').attr('checked', ' ')
+                        $('#HDMI1').text('正在编码')
                     }
-                    if(result[5] == '0') {
-                        $('#three').attr('checked', ' ')
+                    if(result2[0] == 1) {
+                        $('#HDMI21').attr('checked', ' ')
+                    } else if(result2[0] == 2) {
+                        $('#HDMI22').attr('checked', ' ')
+                    } else if(result2[0] == 3) {
+                        $('#HDMI23').attr('checked', ' ')
+                    } else if(result2[0] == 4) {
+                        $('#HDMI24').attr('checked', ' ')
+                    }
+                    if(result2[1] == 0) {
+                        $('#HDMI2').text('空闲')
                     } else {
-                        $('#four').attr('checked', ' ')
+                        $('#HDMI2').text('正在编码')
+                    }
+                    if(result3[0] == 1) {
+                        $('#SDI11').attr('checked', ' ')
+                    } else if(result3[0] == 2) {
+                        $('#SDI12').attr('checked', ' ')
+                    } else if(result3[0] == 3) {
+                        $('#SDI13').attr('checked', ' ')
+                    } else if(result3[0] == 4) {
+                        $('#SDI14').attr('checked', ' ')
+                    }
+                    if(result3[1] == 0) {
+                        $('#SDI1').text('空闲')
+                    } else {
+                        $('#SDI1').text('正在编码')
+                    }
+                    if(result4[0] == 1) {
+                        $('#SDI21').attr('checked', ' ')
+                    } else if(result4[0] == 2) {
+                        $('#SDI22').attr('checked', ' ')
+                    } else if(result4[0] == 3) {
+                        $('#SDI23').attr('checked', ' ')
+                    } else if(result4[0] == 4) {
+                        $('#SDI24').attr('checked', ' ')
+                    }
+                    if(result4[1] == 0) {
+                        $('#SDI2').text('空闲')
+                    } else {
+                        $('#SDI2').text('正在编码')
                     }
                     form.render();
                 } catch(err) {}
-                form.on('radio(radio1)', function (data) {
-                    if(data.value == '否') {
-                        $('#three').attr('disabled', true)
-                        $('#four').attr('disabled', true);
-                        setorder('control_work', 1)
-                    } else {
-                        $('#three').removeAttr('disabled')
-                        $('#four').removeAttr('disabled');
-                        setorder('control_work', 0);
-                    }
-                    form.render();
-                })
-                form.on('radio(radio2)', function (data) {
-                    if(data.value == 3) {
-                        setorder('control_bind', 0);
-                    } else {
-                        setorder('control_bind', 1);
-                    }
-                    form.render();
-                })
             });
 
             function setorder(name, value) {
@@ -171,11 +227,6 @@
                 if(result[0] == 'ok') {} else {
                     layer.msg('未成功!', { icon: 5 })
                 }
-            }
-
-            function colorswith(parse1, parse2) {
-                $(parse1).attr('class', 'layui-btn layui-btn-radius');
-                $(parse2).attr('class', 'layui-btn layui-btn-primary layui-btn-radius');
             }
         </script>
     </body>
