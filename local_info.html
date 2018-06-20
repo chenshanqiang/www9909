@@ -70,7 +70,7 @@
                 })
                 /*重启系统*/
                 $('#reset').on('click', function () {
-                    var result = protocal_set("reset", 'system');
+                    var result = protocal_set_resystem("reset", 'system');
                     if(result[0] == 'ok') {
                         top.layer.open({
                             title: false,

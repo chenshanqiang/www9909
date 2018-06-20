@@ -46,14 +46,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr disabled="">
                         <td>视频编码通道1（HDMI1）</td>
                         <td id="HDMI1"></td>
                         <td class="buttposi">
                             <input type="radio" id="HDMI11" title="1" value="1" name="HDMI1" lay-filter="HDMI1" />
                             <input type="radio" id="HDMI12" title="2" value="2" name="HDMI1" lay-filter="HDMI1" />
                             <input type="radio" id="HDMI13" title="3" value="3" name="HDMI1" lay-filter="HDMI1" />
-                            <input type="radio" id="HDMI14" title="无" value="无" name="HDMI1" lay-filter="HDMI1" /> </td>
+                            <input type="radio" id="HDMI14" title="无" value="无" name="HDMI1" lay-filter="HDMI1" /> 
+                        </td>
                     </tr>
                     <tr>
                         <td>视频编码通道2（HDMI2）</td>
@@ -84,6 +85,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="layui-form-item">
+            	<div class="layui-form-mid layui-word-aux" style="margin-left: 20px;">注：1，2，3分别为三路音频编码通道</div>
+            </div>
         </form>
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript" src="./js/protocal.js"></script>
@@ -163,60 +167,68 @@
                         return false;
                     }
                     if(result1[0] == 1) {
-                        $('#HDMI11').attr('checked', ' ')
+                        $('#HDMI11').attr('checked', ' ');
                     } else if(result1[0] == 2) {
-                        $('#HDMI12').attr('checked', ' ')
+                        $('#HDMI12').attr('checked', ' ');
                     } else if(result1[0] == 3) {
-                        $('#HDMI13').attr('checked', ' ')
+                        $('#HDMI13').attr('checked', ' ');
                     } else if(result1[0] == 4) {
-                        $('#HDMI14').attr('checked', ' ')
+                        $('#HDMI14').attr('checked', ' ');
                     }
                     if(result1[1] == 0) {
-                        $('#HDMI1').text('空闲')
+                        $('#HDMI1').text('空闲');
+                        $('#HDMI1').next().children().removeProp('disabled');
                     } else {
-                        $('#HDMI1').text('正在编码')
+                        $('#HDMI1').text('正在编码');
+                        $('#HDMI1').next().children().prop('disabled',true);
                     }
                     if(result2[0] == 1) {
-                        $('#HDMI21').attr('checked', ' ')
+                        $('#HDMI21').attr('checked', ' ');
                     } else if(result2[0] == 2) {
-                        $('#HDMI22').attr('checked', ' ')
+                        $('#HDMI22').attr('checked', ' ');
                     } else if(result2[0] == 3) {
-                        $('#HDMI23').attr('checked', ' ')
+                        $('#HDMI23').attr('checked', ' ');
                     } else if(result2[0] == 4) {
-                        $('#HDMI24').attr('checked', ' ')
+                        $('#HDMI24').attr('checked', ' ');
                     }
                     if(result2[1] == 0) {
-                        $('#HDMI2').text('空闲')
+                        $('#HDMI2').text('空闲');
+                        $('#HDMI2').next().children().removeProp('disabled');
                     } else {
-                        $('#HDMI2').text('正在编码')
+                        $('#HDMI2').text('正在编码');
+                        $('#HDMI2').next().children().prop('disabled',true);
                     }
                     if(result3[0] == 1) {
-                        $('#SDI11').attr('checked', ' ')
+                        $('#SDI11').attr('checked', ' ');
                     } else if(result3[0] == 2) {
-                        $('#SDI12').attr('checked', ' ')
+                        $('#SDI12').attr('checked', ' ');
                     } else if(result3[0] == 3) {
-                        $('#SDI13').attr('checked', ' ')
+                        $('#SDI13').attr('checked', ' ');
                     } else if(result3[0] == 4) {
-                        $('#SDI14').attr('checked', ' ')
+                        $('#SDI14').attr('checked', ' ');
                     }
                     if(result3[1] == 0) {
-                        $('#SDI1').text('空闲')
+                        $('#SDI1').text('空闲');
+                        $('#SDI1').next().children().removeProp('disabled');
                     } else {
-                        $('#SDI1').text('正在编码')
+                        $('#SDI1').text('正在编码');
+                        $('#SDI1').next().children().prop('disabled',true);
                     }
                     if(result4[0] == 1) {
-                        $('#SDI21').attr('checked', ' ')
+                        $('#SDI21').attr('checked', ' ');
                     } else if(result4[0] == 2) {
-                        $('#SDI22').attr('checked', ' ')
+                        $('#SDI22').attr('checked', ' ');
                     } else if(result4[0] == 3) {
-                        $('#SDI23').attr('checked', ' ')
+                        $('#SDI23').attr('checked', ' ');
                     } else if(result4[0] == 4) {
-                        $('#SDI24').attr('checked', ' ')
+                        $('#SDI24').attr('checked', ' ');
                     }
                     if(result4[1] == 0) {
-                        $('#SDI2').text('空闲')
+                        $('#SDI2').text('空闲');
+                        $('#SDI2').next().children().removeProp('disabled');
                     } else {
-                        $('#SDI2').text('正在编码')
+                        $('#SDI2').text('正在编码');
+                        $('#SDI2').next().children().prop('disabled',true);
                     }
                     form.render();
                 } catch(err) {}

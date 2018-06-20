@@ -256,7 +256,6 @@
                 try {
                     var resultone = protocal_get('servernet', null);
                     var resulttwo = protocal_get("localnet", null);
-                    var resultthree = protocal_get("record_server", null);
                     if(resultone.length < 2) {
                         //throw "servernet result count failure";
                     } else {
@@ -273,12 +272,6 @@
                         $('#gateWay').val(resulttwo[2]);
                         $('#b_MAC').val(resulttwo[3]);
                         $('#b_name').val(name);
-                    }
-                    if(resultthree.length < 2) {
-                        //throw "servernet result count failure";
-                    } else {
-                        $('#n_ip_record').val(resultthree[0]);
-                        $('#n_port_record').val(resultthree[1]);
                     }
                 } catch(err) {}
             }
