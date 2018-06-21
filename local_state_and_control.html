@@ -19,7 +19,7 @@
                     <cite>本机状态与控制</cite>
                 </a>
             </span>
-            <a class="layui-btn layui-btn-sm" style="float: right;" href="javascript:location.replace(location.href);" title="刷新">
+            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="security()" href="javascript:void(0);" title="刷新">
                 <i class="layui-icon layui-icon-refresh"></i>
             </a>
         </div>
@@ -81,7 +81,6 @@
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
         <script type="text/javascript">
             //初始值的获取
-            
             layui.use(['element', 'layer', 'form'], function () {
                 var layer = layui.layer,
                     form = layui.form,

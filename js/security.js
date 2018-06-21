@@ -1,10 +1,12 @@
 // JavaScript Document
-var usernameone = getCookienameone( "usernameone" ),
-	pwdone = getCookiepwdone( "passone" );
-if ( usernameone=="dsppa" && pwdone=="dsppa" ){}else {
-	location.href = './index.html';
+var security = function(){
+	var usernameone = getCookienameone( "usernameone" ),
+		pwdone = getCookiepwdone( "passone" );
+	if ( usernameone=="dsppa" && pwdone=="dsppa" ){}else {
+		parent.jumpmain();
+	}
 }
-
+security();
 function getCookienameone( cnameone ) {
 	var nameone = cnameone + "=";
 	var ca = document.cookie.split( ';' );
