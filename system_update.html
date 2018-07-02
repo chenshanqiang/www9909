@@ -122,12 +122,12 @@
                 try {
                     if(value_final != '') {
                         var result = protocal_set_one('update', value_final);
-                        /*var result = ['UPGRADENOW'];*/
+                        var result = ['UPGRADENOW'];
                         if(result[0] == 'UPGRADENOW') {
                             var timer = setInterval(function () {
                                 try {
                                     var resultResult = protocal_get_one("UPGRADENOW", null);
-                                    /*var resultResult = ['UPGRADENOW'];*/
+                                    var resultResult = ['UPGRADENOW'];
                                     switch(resultResult[0]) {
                                         case 'SUCCESS':
                                             $('#fresh').attr('href', 'javascript:location.replace(location.href);');
