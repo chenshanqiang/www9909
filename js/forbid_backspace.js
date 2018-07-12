@@ -1,6 +1,5 @@
 document.onkeypress = forbidBackSpace;
 document.onkeydown = forbidBackSpace;
-
 function forbidBackSpace( e ) {
 	var ev = e || window.event; //获取event对象 
 	var obj = ev.target || ev.srcElement; //获取事件源 
@@ -11,5 +10,5 @@ function forbidBackSpace( e ) {
 	vDisabled = ( vDisabled == undefined ) ? true : vDisabled;
 	var flag1 = ev.keyCode == 8 && ( t == "password" || t == "text" || t == "textarea" ) && ( vReadOnly == true || vDisabled == true );
 	var flag2 = ev.keyCode == 8 && t != "password" && t != "text" && t != "textarea";
-	if ( flag2 || flag1 ) return false;
+	if ( flag2 || flag1  || ev.keyCode == 13) return false;
 }

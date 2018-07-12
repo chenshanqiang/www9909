@@ -18,7 +18,7 @@
     </head>
     <body onload="onloadmain()">
         <div class="layui-layout layui-layout-admin">
-            <div class="layui-header header header-demo">
+            <div class="layui-header header header-demo" style="min-width: 1000px;">
                 <div class="layui-main">
                     <a style="display:inline-block;" class="logo" href="javascript:;">
                         <img src="images/mainlog.png" style="height: 40px;"> </a>
@@ -42,19 +42,19 @@
                             </a>
                         </li>
                         <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;"  id="two"  onclick="href_web('configure_network')" target="main">
+                            <a class="javascript:;" href="javascript:;" id="two" onclick="href_web('configure_network')" target="main">
                                 <i class="fa fa-cog fa-lg fa-fw" aria-hidden="true"></i>
                                 <cite>网络配置</cite>
                             </a>
                         </li>
                         <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;" id="three"  onclick="href_web('system_update')" target="main">
+                            <a class="javascript:;" href="javascript:;" id="three" onclick="href_web('system_update')" target="main">
                                 <i class="fa fa-sticky-note fa-lg fa-fw" aria-hidden="true"></i>
                                 <cite>系统升级</cite>
                             </a>
                         </li>
                         <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;" id="four"  onclick="href_web('local_info')" target="main">
+                            <a class="javascript:;" href="javascript:;" id="four" onclick="href_web('local_info')" target="main">
                                 <i class="fa fa-info-circle fa-lg fa-fw" aria-hidden="true"></i>
                                 <cite>关于本机</cite>
                             </a>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="layui-tab layui-tab-card site-demo-title x-main" lay-filter="x-tab" lay-allowclose="true">
-                <div class="x-slide_left"></div>
+                <!--<div class="x-slide_left"></div>-->
                 <div class="layui-tab-content site-demo site-demo-body">
                     <div class="layui-tab-item layui-show">
                         <iframe frameborder="0" name="main" src="local_state_and_control.html" class="x-iframe" id="main-iframe"></iframe>
@@ -83,53 +83,31 @@
             if(usernameone != "dsppa" && pwdone != "dsppa") {} else {}
             layui.use(['layer', 'element'], function () {
                 var layer = layui.layer
-               		$ = layui.jquery;
-                //导航的hover效果、二级菜单等功能，需要依赖element模块
-                // 侧边栏点击隐藏兄弟元素
+                $ = layui.jquery;
                 $('.layui-nav-item').click(function (event) {
                     $(this).siblings().removeClass('layui-nav-itemed');
                 });
                 height = $('.layui-layout-admin .site-demo').height();
                 $('.layui-layout-admin .site-demo').height(height - 100);
-                if($(window).width() < 750) {
-                    trun = 0;
-                    $('.x-slide_left').css('background-position', '0px -61px');
-                } else {
-                    trun = 1;
-                }
-                $('.x-slide_left').click(function (event) {
-                    if(trun) {
-                        $('.x-side').animate({
-                            left: '-200px'
-                        }, 200).siblings('.x-main').animate({
-                            left: '0px'
-                        }, 200);
-                        $(this).css('background-position', '0px -61px');
-                        $('.layui-footer').css("margin-left", "-200px");
-                        trun = 0;
-                    } else {
-                        $('.x-side').animate({
-                            left: '0px'
-                        }, 200).siblings('.x-main').animate({
-                            left: '200px'
-                        }, 200);
-                        $(this).css('background-position', '0px 0px');
-                        $('.layui-footer').css("margin-left", "0px");
-                        trun = 1;
-                    }
-                });
+                $(window).resize(function () {
+                    var winheight = $(window).height();
+                    var header = $('.header').height();
+                    var footer = $('.footer').height();
+                    $('.site-demo-body').height(winheight - header - footer - 5);
+                })
             });
             document.getElementById('exit').onclick = function () {
                 location.href = './index.html';
                 setCookie("usernameone", "", "passone", "");
             };
-            function jumpmain(){
-            	location.href = './index.html';
+
+            function jumpmain() {
+                location.href = './index.html';
             }
             //When the page is loaded, the function is executed      
             function onloadmain() {
                 try {
-                    var userOne = getCookienameone( "usernameone" );
+                    var userOne = getCookienameone("usernameone");
                     document.getElementById('user').innerHTML = userOne;
                     var base = new Base64();
                     var result = protocal_get('main', null);

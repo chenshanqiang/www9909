@@ -1,68 +1,55 @@
 /* CSS Document */
 
-* {
-	margin: 0px;
-	padding: 0px;
-}
-html, body {
-	width: 100%;
-	height: 100%;
-	background-color: #F1F1F1;
+body {
 	overflow: hidden;
 }
-.top {
-	width: 567px;
-	height: 10%;
-	margin: 5% auto;
-	margin-bottom: 0%;
+.background_mask {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 90;
+	background-color: rgb(255, 255, 255);
 }
-.uspw {
+.top {
+	margin-top: -120px;
+	margin-left: -30px;
+}
+#className {
+	color: #000000!important;
+}
+.login {
 	background: -webkit-linear-gradient(#88C868, #80C261, #448624);
 	background: -o-linear-gradient( #88C868, #80C261, #448624);
 	background: -moz-linear-gradient( #88C868, #80C261, #448624);
 	background: linear-gradient( #88C868, #80C261, #448624);
 	background-color: #80C261;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#88C868, endColorstr=#448624);
-	/*IE<9>*/
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#88C868,endColorstr=#448624)";
-	/*IE<8>*/
-	width: 35%;
-	height: 35%;
-	margin: 3% auto;
-	margin-top: 1%;
-	border-radius: 20px;
-	box-shadow: 0px 10px 5px 5px #979797;
-	padding: 7% 5% 5% 5%;
 	text-align: center;
-	overflow: hidden;
+	height: 260px;
+	width: 500px;
+	padding: 20px;
+	/*background-color: rgba(0, 0, 0, 0.5);*/
+	border-radius: 20px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -140px 0 0 -270px;
+	z-index: 99;
 }
-.login {
-	width: 36%;
-	margin: 1% auto;
+.login h1 {
+	text-align: center;
+	color: #fff;
+	font-size: 24px;
+	margin-bottom: 20px;
 }
-.login .layui-btn-radius {
+.login_btn {
+	width: 40%;
+	margin: 0 auto;
 	background-color: black;
 	border-color: #3C3A3A;
-	color: #fff;
-	width: 100%;
-	font-size: 20px;
-	letter-spacing: 5px;
-	text-align: center;
-}
-.message {
-	border-radius: 20px!important;
-	background-color: red;
-}
-label {
-	margin-left: 9%!important;
-	width: 5%!important;
-}
-input {
-	width: 80%!important;
-}
-.layui-input-block {
-	margin-left: 20%!important;
-}
-.layui-form-item {
-	margin-top: 3%!important;
+	border-radius: 20px;
+	margin-left: -110px;
 }

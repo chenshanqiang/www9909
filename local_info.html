@@ -21,41 +21,44 @@
                     <cite>关于本机</cite>
                 </a>
             </span>
-            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="security()" href="javascript:void(0);" title="刷新">
+            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="freThisPaper()" href="javascript:void(0);" title="刷新">
                 <i class="layui-icon layui-icon-refresh"></i>
             </a>
         </div>
         <div class="layui-form layui-form-pane">
             <div class="layui-form-item" style="margin-top: 20px;">
-            	<div class="layui-inline">
-                	<label class="layui-form-label">当前系统版本号</label>
-                	<div class="layui-input-inline">
-                		<input type="text" name="systemverion" id="mach1" placeholder="当前系统版本号" class="layui-input" disabled=""> 
-                	</div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">当前系统版本号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="systemverion" id="mach1" placeholder="当前系统版本号" class="layui-input" disabled=""> </div>
                 </div>
                 <div class="layui-inline">
-                	<div class="layui-input-block">
-                    	<button class="layui-btn layui-btn-primary" style="color:#000;" id="reset">重启系统</button>
-            			<button class="layui-btn layui-btn-primary" style="color:#000;" id="factory_reset">恢复出厂设置</button>
-                	</div>
-            	</div>
+                    <div class="layui-input-block">
+                        <div id="reset" class="layui-btn layui-btn-primary" lay-submit="" lay-filter="reset">重启系统</div>
+                        <div id='factory_reset' class="layui-btn layui-btn-primary" lay-submit="" lay-filter="factory_reset">恢复出厂设置</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-left: 2%;">
+                <div class="layui-form-mid layui-word-aux">注释：请填写6到12位密码</div>
             </div>
         </div>
-        <script type="text/javascript" src="./js/local_info.js"></script>
+        <script type="text/javascript" src="./js/protocal.js"></script>
         <script type="text/javascript" src="./js/security.js"></script>
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
-        <script type="text/javascript" src="./js/protocal.js"></script>
+        <script type="text/javascript" src="./js/local_info.js"></script>
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript">
-            layui.use(['element', 'layer'], function () {
-                var layer = layui.layer,
+            layui.use(['element', 'form', 'layer'], function () {
+                var form = layui.form,
+                    layer = layui.layer,
                     $ = layui.jquery;
                 try {
                     var result = protocal_get_resystem("version", null);
                     if(result.length < 1) {} else {
-                    	$('#mach1').val(result[0]);
+                        $('#mach1').val(result[0]);
                     }
-                } catch(err) {}    
+                } catch(err) {}
                 $("button").off("mousedown").on("mousedown", function () {
                     $(this).css({
                         "background-color": "#44993D",
@@ -69,7 +72,7 @@
                     });
                 })
                 /*重启系统*/
-                $('#reset').on('click', function () {
+                form.on('submit(reset)', function (data) {
                     var result = protocal_set_resystem("reset", 'system');
                     if(result[0] == 'ok') {
                         top.layer.open({
@@ -93,33 +96,48 @@
                             skin: 'message'
                         });
                     }
-                })
+                    return false;
+                });
                 /*恢复出厂值*/
-                $('#factory_reset').on('click', function () {
-                    var result = protocal_set_resystem("restore_set", 'restore');
-                    if(result[0] == 'ok') {
-                        top.layer.open({
-                            title: false,
-                            icon: 6,
-                            time: 250000,
-                            content: '正在恢复出厂值...',
-                            btn: false,
-                            skin: "layui-layer-molv",
-                            closeBtn: 0,
-                        })
-                        setCookie("usernameone", "", "passone", "");
-                        setTimeout(function () {
-                            window.parent.location.reload();
-                        }, 25000);
-                    } else {
-                        layer.msg('恢复出厂值失败！', {
-                            time: 3000,
-                            icon: 2,
-                            anim: 0,
-                            skin: 'message'
-                        });
-                    }
-                })
+                form.on('submit(factory_reset)', function (data) {
+                    layer.open({
+                        title: ' ',
+                        icon: 3,
+                        content: '是否确定恢复出厂设置？',
+                        btn: ['是', '否'],
+                        skin: "layui-layer-molv",
+                        closeBtn: 1,
+                        yes: function (index) {
+                            var result = protocal_set_resystem("restore_set", 'restore');
+                            if(result[0] == 'ok') {
+                                top.layer.open({
+                                    title: false,
+                                    icon: 6,
+                                    time: 250000,
+                                    content: '正在恢复出厂值...',
+                                    btn: false,
+                                    skin: "layui-layer-molv",
+                                    closeBtn: 0,
+                                })
+                                setCookie("usernameone", "", "passone", "");
+                                setTimeout(function () {
+                                    window.parent.location.reload();
+                                }, 25000);
+                            } else {
+                                layer.msg('恢复出厂值失败！', {
+                                    time: 3000,
+                                    icon: 2,
+                                    anim: 0,
+                                    skin: 'message'
+                                });
+                            }
+                        },
+                        btn2: function (index) {
+                            layer.close(index);
+                        }
+                    });
+                    return false;
+                });
                 /*恢复出厂值结束*/
             });
         </script>

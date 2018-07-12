@@ -4,37 +4,59 @@
         <meta charset="utf-8">
         <title>音视频一线通终端管理设置</title>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10,chrome=1">
-        <link rel="stylesheet" type="text/css" href="./css/main.css">
-        <style type="text/css">
-            input {
-                width: 400px!important;
-            }
-        </style>
-    </head>
-    <body onload="onloadmain()">
+        <link rel="stylesheet" type="text/css" href="./css/main.css"> </head>
+    <body>
         <div class="x-nav">
             <span class="layui-breadcrumb">
                 <a>
                     <cite>网络配置</cite>
                 </a>
             </span>
-            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="security()" href="javascript:void(0);" title="刷新">
+            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="freThisPaper()" href="javascript:void(0);" title="刷新">
                 <i class="layui-icon layui-icon-refresh"></i>
             </a>
         </div>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>远程通信服务器</legend>
         </fieldset>
-        <form class="layui-form layui-form-pane">
+        <form class="layui-form layui-form-pane" lay-filter="example">
             <div class="layui-form-item">
                 <label class="layui-form-label">IP</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="ip" id='n_ip' lay-verify="required|ip" autocomplete="on" placeholder="请输入IP地址" class="layui-input"> </div>
+                <div class="layui-input-block">
+                    <input type="text" name="ipOne" id='n_ip' lay-verify="required|ip" autocomplete="on" placeholder="请输入IP地址" class="layui-input"> </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">端口</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-block">
                     <input type="text" name="port" id='n_port' lay-verify="required|port" autocomplete="on" placeholder="请输入端口号" class="layui-input"> </div>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>本机配置</legend>
+            </fieldset>
+            <div class="layui-form-item">
+                <label class="layui-form-label">IP</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ipTwo" id="b_ip" lay-verify="required|ip" autocomplete="on" placeholder="请输入IP地址" class="layui-input"> </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">子网掩码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="subNet" id="b_subnet" name="subNet" lay-verify="required|subNet" autocomplete="on" placeholder="请输入子网掩码" class="layui-input"> </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">网关</label>
+                <div class="layui-input-block">
+                    <input type="text" name="gateWay" id="gateWay" lay-verify="required|gateWay" autocomplete="on" placeholder="请输入网关" class="layui-input"> </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">MAC地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="mac" id="b_MAC" autocomplete="on" placeholder="请输入MAC地址" class="layui-input" disabled="disabled"> </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称修改</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" id="b_name" lay-verify="required|name" autocomplete="on" placeholder="名称修改" class="layui-input"> </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -42,52 +64,41 @@
                 </div>
             </div>
         </form>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>本机配置</legend>
-        </fieldset>
-        <form class="layui-form layui-form-pane">
-            <div class="layui-form-item">
-                <label class="layui-form-label">IP</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="b_ip" name="ip" lay-verify="required|ip" autocomplete="on" placeholder="请输入IP地址" class="layui-input text-box"> </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">子网掩码</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="b_subnet" name="subNet" lay-verify="required|subNet" autocomplete="on" placeholder="请输入子网掩码" class="layui-input"> </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">网关</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="gateWay" name="gateWay" lay-verify="required|gateWay" autocomplete="on" placeholder="请输入网关" class="layui-input"> </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">MAC地址</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="b_MAC" name="mac" autocomplete="on" placeholder="请输入MAC地址" class="layui-input" disabled="disabled"> </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">名称修改</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="b_name" name="name" lay-verify="required|name" autocomplete="on" placeholder="名称修改" class="layui-input"> </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo2">提交</button>
-                </div>
-            </div>
-        </form>
         <script type="text/javascript" src="./js/protocal.js"></script>
         <script type="text/javascript" src="./js/security.js"></script>
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
-        <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript" src="./js/base64.js"></script>
         <script type="text/javascript">
-            layui.use(['element', 'layer', 'form'], function () {
+            layui.use(['element', 'form', 'layer'], function () {
                 var layer = layui.layer,
                     form = layui.form,
                     $ = layui.jquery;
+                /*获取初始值开始*/
+                try {
+                    var resultone = protocal_get('servernet', null);
+                    var resulttwo = protocal_get("localnet", null);
+                    /*var resultone = ['172.16.10.125', '7002'];
+                    var resulttwo = ['172.16.10.125', '255.255.255.0', '172.16.10.12', '15', '56'];*/
+                    var base = new Base64();
+                    if(resultone.length < 2) {
+                        //throw "servernet result count failure";
+                    }
+                    if(resulttwo.length < 5) {
+                        //throw " localnet result count failure";
+                    }
+                    var name = base.decode(resulttwo[4]);
+                    form.val('example', {
+                        'ipOne': resultone[0],
+                        'port': resultone[1],
+                        'ipTwo': resulttwo[0],
+                        'subNet': resulttwo[1],
+                        'gateWay': resulttwo[2],
+                        'mac': resulttwo[3],
+                        'name': name
+                    })
+                } catch(err) {}
+                /*获取初始值结束*/
                 $("button").off("mousedown").on("mousedown", function () {
                     $(this).css({
                         "background-color": "#44993D",
@@ -101,46 +112,12 @@
                     });
                 })
                 form.on('submit(demo1)', function (data) {
-                    var result = data.field.ip + '&' + data.field.port;
-                    try {
-                        var result = protocal_set('servernet', result);
-                        if(result.length == 2) {
-                            if(result[0] == 'ok' && result[1] == 'ok') layer.msg('提交成功！', {
-                                time: 3000,
-                                icon: 1,
-                                anim: 0,
-                                skin: 'message',
-                                shade: [0.5, '#393D49']
-                            });
-                            // return false;
-                        } else if(result.length == 3) {
-                            if(result[0] == 'ok' && result[1] == 'ok' && result[2] == 'ok') top.layer.open({
-                                title: false,
-                                icon: 6,
-                                time: 250000,
-                                content: '正在重启系统...',
-                                btn: false,
-                                skin: "layui-layer-molv",
-                                closeBtn: 0,
-                            })
-                            setCookie("usernameone", "", "passone", "");
-                            setTimeout(function () {
-                                window.parent.open("http://" + $("#b_ip").val(), '_self');
-                            }, 25000);
-                        } else {
-                            layer.msg('提交失败！', {
-                                time: 3000,
-                                icon: 2,
-                                anim: 0,
-                                skin: 'message',
-                                shade: [0.5, '#393D49']
-                            });
-                        }
-                    } catch(err) {}
-                    return false;
-                });
-                form.on('submit(demo2)', function (data) {
-                    var resultIp = data.field.ip.split(".");
+                    var result_1 = data.field.ipTwo,
+                        result_2 = data.field.subNet,
+                        result_3 = data.field.gateWay,
+                        result_4 = data.field.mac;
+                    var result_5 = nameFormat(data.field.name);
+                    var resultIp = data.field.ipTwo.split(".");
                     var resultSubnet = data.field.subNet.split(".");
                     var regGateWayAll = data.field.gateWay.split(".");
                     var andResultOne = resultIp[0] & resultSubnet[0],
@@ -151,15 +128,16 @@
                         andResultSix = resultSubnet[1] & regGateWayAll[1],
                         andResultSeven = resultSubnet[2] & regGateWayAll[2],
                         andResultEight = resultSubnet[3] & regGateWayAll[3];
-                    var resultFiveArray = stringToBytes(data.field.name);
+                    var resultFiveArray = stringToBytes(result_5);
                     if(resultFiveArray.length <= '32') {
                         if(andResultOne == andResultFive && andResultTwo == andResultSix && andResultThree == andResultSeven && andResultFour == andResultEight) {
                             var base = new Base64();
-                            var result_51 = base.encode(data.field.name);
-                            var result = data.field.ip + '&' + data.field.subNet + '&' + data.field.gateWay + '&' + data.field.mac + '&' + result_51;
+                            var result_51 = base.encode(result_5);
+                            var result = data.field.ipOne + '&' + data.field.port + '&' + data.field.ipTwo + '&' + data.field.subNet + '&' + data.field.gateWay + '&' + data.field.mac + '&' + result_51;
                             try {
-                                //var resultarray = ['ok','ok','ok'];
-                                var resultarray = protocal_set('localnet', result);
+                                var resultarray = protocal_set('webip', result);
+                                /* console.log(resultarray)*/
+                                /*var resultarray = ['ok', 'ok','ok'];*/
                                 if(resultarray.length == 2) {
                                     if(resultarray[0] == 'ok' && resultarray[1] == 'ok') layer.msg('提交成功！', {
                                         time: 3000,
@@ -212,7 +190,7 @@
                         });
                     }
                     return false;
-                });
+                })
                 form.verify({
                     ip: function (value) {
                         var reg = /^(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
@@ -240,6 +218,25 @@
                     }
                 });
             });
+
+            function nameFormat(value) {
+                if(!/^[\u4e00-\u9fa5\-a-z0-9()（）]+$/ig.test(value)) {
+                    var valueArr = value.split("");
+                    var newValue = "";
+                    for(var i = 0; i < valueArr.length; i++) {
+                        if(!/^[\u4e00-\u9fa5\-a-z0-9()（）]+$/ig.test(valueArr[i])) {
+                            valueArr[i] = "_";
+                            newValue += valueArr[i];
+                        } else {
+                            newValue += valueArr[i];
+                        }
+                    }
+                    return newValue;
+                } else {
+                    var newValue = value;
+                    return newValue;
+                }
+            }
             //Test mac
             function check_mac(id, id1) {
                 var str = document.getElementById(id).value;
@@ -250,30 +247,6 @@
                 } else {
                     document.getElementById(id1).style.display = "none";
                 }
-            }
-            //When the page is loaded, the function is executed      
-            function onloadmain() {
-                try {
-                    var resultone = protocal_get('servernet', null);
-                    var resulttwo = protocal_get("localnet", null);
-                    if(resultone.length < 2) {
-                        //throw "servernet result count failure";
-                    } else {
-                        $('#n_ip').val(resultone[0]);
-                        $('#n_port').val(resultone[1]);
-                    }
-                    if(resulttwo.length < 5) {
-                        //throw " localnet result count failure";
-                    } else {
-                        var base = new Base64();
-                        var name = base.decode(resulttwo[4]);
-                        $('#b_ip').val(resulttwo[0]);
-                        $('#b_subnet').val(resulttwo[1]);
-                        $('#gateWay').val(resulttwo[2]);
-                        $('#b_MAC').val(resulttwo[3]);
-                        $('#b_name').val(name);
-                    }
-                } catch(err) {}
             }
             /** 
              *@description:将string转为UTF-8格式signed char字节数组 

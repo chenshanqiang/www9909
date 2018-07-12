@@ -1,12 +1,12 @@
 // JavaScript Document
-var security = function(){
-	var usernameone = getCookienameone( "usernameone" ),
-		pwdone = getCookiepwdone( "passone" );
-	if ( usernameone=="dsppa" && pwdone=="dsppa" ){}else {
-		parent.jumpmain();
-	}
+var usernameone = getCookienameone( "usernameone" ),
+	pwdone = getCookiepwdone( "passone" );
+if ( usernameone=="dsppa" && pwdone=="dsppa" ){}else {
+	parent.jumpmain();
 }
-security();
+function freThisPaper(){
+	 location.reload();
+}
 function getCookienameone( cnameone ) {
 	var nameone = cnameone + "=";
 	var ca = document.cookie.split( ';' );
