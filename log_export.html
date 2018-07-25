@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>音视频一线通终端管理设置</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10,chrome=1">
+        <link rel="stylesheet" type="text/css" href="./css/main.css"> 
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb" lay-separator=">">
+                <a>
+                    <cite>日志导出</cite>
+                </a>
+            </span>
+            <a class="layui-btn layui-btn-sm" style="float: right;" onclick="freThisPaper()" href="javascript:void(0);" title="刷新">
+                <i class="layui-icon layui-icon-refresh"></i>
+            </a>
+        </div>
+        <div class="layui-form">
+            <table class="layui-table">
+                <thead>
+                    <tr style="background-color:#F0F0F0">
+                        <th style="width:50%">文件名称</th>
+                        <th style="width:50%">操作</th>
+                    </tr>
+                </thead>
+                <tbody id='tbody'> </tbody>
+            </table>
+        </div>
+        <script type="text/javascript" src="./js/security.js"></script>
+        <script type="text/javascript" src="./js/forbid_backspace.js"></script>
+        <script type="text/javascript" src="./layui/layui.js"></script>
+        <script type="text/javascript" src="./js/update.js"></script>
+        <script type="text/javascript">
+            layui.use(['element', 'jquery'], function () {
+                var $ = layui.jquery;
+                try {
+                    result = protocal_get_one('log_file', null);
+                    /*result = ['1.log', '2.log', '3.log', '4.log', '5.log', '6.log', '7.log'];*/
+                    if(result.length < 1) {
+                        return;
+                    }
+                    for(var i = 0; i < result.length - 1; i++) {
+                        var trhtml = "<tr><td>" + result[i] + "</td><td style='text-align:center;'><a class='layui-btn' href='php/downFile.php?name=" + result[i] + "'>文件下载</a></td></tr>";
+                        $('#tbody').append(trhtml);
+                    }
+                } catch(err) {
+                    alert(err)
+                }
+            })
+        </script>
+    </body>
+</html>

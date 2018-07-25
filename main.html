@@ -59,6 +59,12 @@
                                 <cite>关于本机</cite>
                             </a>
                         </li>
+                        <li id="app" v-if="status === 'Y'" class="layui-nav-item">
+                            <a class="javascript:;" href="javascript:;" id="five" onclick="href_web('log_export')" target="main">
+                                <i class="fa fa-file fa-lg fa-fw" aria-hidden="true"></i>
+                                <cite>日志导出</cite>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -77,10 +83,22 @@
         <script type="text/javascript" src="./js/protocal.js"></script>
         <script type="text/javascript" src="./js/base64.js"></script>
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
+        <script type="text/javascript" src="./js/vue.min.js"></script>
         <script type="text/javascript">
-            var usernameone = getCookienameone("usernameone"),
-                pwdone = getCookiepwdone("passone");
-            if(usernameone != "dsppa" && pwdone != "dsppa") {} else {}
+        	var usernameone = getCookienameone("usernameone");
+            if(usernameone == 'dsppa') {
+                var statusyn = 'Y';
+            } else {
+                var statusyn = 'N';
+            }
+            new Vue({
+                el: '#app',
+                data: {
+                    status: statusyn
+                }
+            })
+        </script>
+        <script type="text/javascript">
             layui.use(['layer', 'element'], function () {
                 var layer = layui.layer
                 $ = layui.jquery;
@@ -149,6 +167,9 @@
                         break;
                     case 'local_info':
                         document.getElementById('main-iframe').src = 'local_info.html';
+                        break;
+                    case 'log_export':
+                        document.getElementById('main-iframe').src = 'log_export.html';
                         break;
                 }
             }
