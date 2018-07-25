@@ -70,7 +70,7 @@
                 //监听提交
                 form.on('submit(login)', function (data) {
                     setCookie("usernameone", data.field.user, "passone", data.field.pwd);
-                    if(data.field.user == "dsppa" && data.field.pwd == "dsppa") {
+                    if((data.field.user == "dsppa" && data.field.pwd == "dsppa")||(data.field.user == "admin" && data.field.pwd == "admin")) {
                         location.href = './main.html';
                     } else {
                         layer.msg('用户名或密码输入信息有错误！', {

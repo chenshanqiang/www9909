@@ -142,7 +142,75 @@
                         $('#SDI2').next().children().prop('disabled', true);
                     }
                     form.render();
-                } catch(err) {}
+                } catch(err) {
+                    alert(err)
+                }
+                setInterval(function () {
+                    try {
+                        var result1, result2, result3, result4;
+                        result1 = protocal_get('state_control_1', null);
+                        result2 = protocal_get('state_control_2', null);
+                        result3 = protocal_get('state_control_3', null);
+                        result4 = protocal_get('state_control_4', null);
+                        /*result1 = ['1', '0'];
+                        result2 = ['1', '0'];
+                        result3 = ['1', '0'];
+                        result4 = ['1', '0'];*/
+                        if(result1.length < 2) {
+                            layer.msg('获取result1返回值数量有误！', { icon: 2 });
+                            return false;
+                        }
+                        if(result2.length < 2) {
+                            layer.msg('获取result2返回值数量有误！', { icon: 2 });
+                            return false;
+                        }
+                        if(result3.length < 2) {
+                            layer.msg('获取result3返回值数量有误！', { icon: 2 });
+                            return false;
+                        }
+                        if(result4.length < 2) {
+                            layer.msg('获取result4返回值数量有误！', { icon: 2 });
+                            return false;
+                        }
+                        form.val('example', {
+                            "HDMI1": result1[0],
+                            "HDMI2": result2[0],
+                            "SDI1": result3[0],
+                            "SDI2": result4[0]
+                        })
+                        if(result1[1] == 0) {
+                            $('#HDMI1').text('空闲');
+                            $('#HDMI1').next().children().removeProp('disabled');
+                        } else {
+                            $('#HDMI1').text('正在编码');
+                            $('#HDMI1').next().children().prop('disabled', true);
+                        }
+                        if(result2[1] == 0) {
+                            $('#HDMI2').text('空闲');
+                            $('#HDMI2').next().children().removeProp('disabled');
+                        } else {
+                            $('#HDMI2').text('正在编码');
+                            $('#HDMI2').next().children().prop('disabled', true);
+                        }
+                        if(result3[1] == 0) {
+                            $('#SDI1').text('空闲');
+                            $('#SDI1').next().children().removeProp('disabled');
+                        } else {
+                            $('#SDI1').text('正在编码');
+                            $('#SDI1').next().children().prop('disabled', true);
+                        }
+                        if(result4[1] == 0) {
+                            $('#SDI2').text('空闲');
+                            $('#SDI2').next().children().removeProp('disabled');
+                        } else {
+                            $('#SDI2').text('正在编码');
+                            $('#SDI2').next().children().prop('disabled', true);
+                        }
+                        form.render();
+                    } catch(err) {
+                        alert(err)
+                    }
+                }, 1000);
                 form.on('radio(HDMI1)', function (data) {
                     if(data.value == 1) {
                         setorder('HDMI1', 1);
