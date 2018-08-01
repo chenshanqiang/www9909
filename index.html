@@ -58,6 +58,22 @@
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript" src="./js/forbid_backspace.js"></script>
         <script type="text/javascript">
+            document.onkeypress = forbidBackSpace;
+            document.onkeydown = forbidBackSpace;
+
+            function forbidBackSpace(e) {
+                var ev = e || window.event;
+                var obj = ev.target || ev.srcElement;
+                console.log(obj)
+                var t = obj.type || obj.getAttribute('type');
+                var vReadOnly = obj.readOnly;
+                var vDisabled = obj.disabled;
+                vReadOnly = (vReadOnly == undefined) ? false : vReadOnly;
+                vDisabled = (vDisabled == undefined) ? true : vDisabled;
+                var flag1 = ev.keyCode == 8 && (t == "password" || t == "text" || t == "textarea") && (vReadOnly == true || vDisabled == true);
+                var flag2 = ev.keyCode == 8 && t != "password" && t != "text" && t != "textarea";
+                if(flag2 || flag1) return false;
+            }
             layui.use(['form', 'layer'], function () {
                 var form = layui.form,
                     layer = layui.layer,
@@ -71,7 +87,7 @@
                 //监听提交
                 form.on('submit(login)', function (data) {
                     setCookie("usernameone", data.field.user, "passone", data.field.pwd);
-                    if((data.field.user == "dsppa" && data.field.pwd == "dsppa")||(data.field.user == "admin" && data.field.pwd == "admin")) {
+                    if((data.field.user == "dsppa" && data.field.pwd == "dsppa") || (data.field.user == "admin" && data.field.pwd == "admin")) {
                         location.href = './main.html';
                     } else {
                         layer.msg('用户名或密码输入信息有错误！', {
