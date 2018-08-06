@@ -1,9 +1,9 @@
 // JavaScript Document
 var usernameone = getCookienameone( "usernameone" ),
 	pwdone = getCookiepwdone( "passone" );
-if (usernameone=="dsppa" && pwdone=="dsppa" ){
+if (usernameone=="admin" && pwdone=="admin" ){
 	
-}else if(usernameone=="admin"&&pwdone=="admin"){
+}else if(usernameone=="dsppa"&&pwdone=="dsppa"){
 	
 }else {
 	parent.jumpmain();

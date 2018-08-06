@@ -55,6 +55,7 @@
         <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="./layui/layui.js"></script>
         <script type="text/javascript">
+            var usernameone = getCookienameone("usernameone");
             layui.use(['element', 'layer'], function () {
                 var layer = layui.layer;
                 try {
@@ -146,7 +147,7 @@
                                                     clearInterval(timer);
                                                     setCookie("usernameone", "", "passone", "");
                                                     setTimeout(function () {
-                                                        window.parent.location.href ="index.html";
+                                                        window.parent.location.href = "index.html";
                                                     }, 15000);
                                                 },
                                             });
@@ -200,7 +201,7 @@
                                             clearInterval(timer);
                                             setCookie("usernameone", "", "passone", "");
                                             setTimeout(function () {
-                                                window.parent.location.href ="index.html";
+                                                window.parent.location.href = "index.html";
                                             }, 240000);
                                             clearInterval(timer);
                                             break;
@@ -227,7 +228,7 @@
                                                     clearInterval(timer);
                                                     setCookie("usernameone", "", "passone", "");
                                                     setTimeout(function () {
-                                                        window.parent.location.href ="index.html";
+                                                        window.parent.location.href = "index.html";
                                                     }, 15000);
                                                 },
                                             });
@@ -262,7 +263,7 @@
                                             clearInterval(timer);
                                             setCookie("usernameone", "", "passone", "");
                                             setTimeout(function () {
-                                                window.parent.location.href ="index.html";
+                                                window.parent.location.href = "index.html";
                                             }, 200000);
                                             clearInterval(timer);
                                             break;
@@ -289,7 +290,7 @@
                                                     clearInterval(timer);
                                                     setCookie("usernameone", "", "passone", "");
                                                     setTimeout(function () {
-                                                        window.parent.location.href ="index.html";
+                                                        window.parent.location.href = "index.html";
                                                     }, 15000);
                                                 },
                                             });
@@ -311,8 +312,10 @@
                                             window.parent.document.getElementById('two').onclick = '';
                                             window.parent.document.getElementById('three').onclick = '';
                                             window.parent.document.getElementById('four').onclick = '';
-                                            window.parent.document.getElementById('five').onclick = '';
                                             window.parent.document.getElementById('exit').onclick = '';
+                                            if(usernameone == 'dsppa') {
+                                                window.parent.document.getElementById('five').onclick = '';
+                                            } else {}
                                             setTimeout("cls_content()", 1360);
                                             break;
                                     }
